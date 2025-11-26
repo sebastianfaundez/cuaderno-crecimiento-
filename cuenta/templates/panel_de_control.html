@@ -1,0 +1,25 @@
+<h2>Cuaderno de Crecimiento</h2>
+<p>
+    ¡Bienvenidos al registro de datos de tus hijos!
+</p>
+<div>
+    <ul>
+        {% if user.is_autheticated %}
+
+    </ul>
+    <li>
+        <a href="{% url 'panel_de_control %}">inicio</a>
+    </li>
+    <li>
+        <form action="{% 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Cerrar sesión</button>
+        </form>
+    </li>
+    <li>
+        <a href="{% url 'login' %}">Iniciar sesión</a>
+    </li>
+    <li>
+        <a href="{% url 'registro' %}">Regístrate</a>
+    </li>
+</div>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cuaderno de Crecimiento</title>
+</head>
+<body>
+
+<h1>¡Bienvenidas familias!</h1>
+<h2>Hola</h2> 
+<form method="POST">
+        <input type="text" name="username" placeholder="Nombre de usuario">
+        <input type="password" name="password" placeholder="Escriba su contraseña">
+        <button type="submit"> Iniciar sesión </button>
+        <a>Restablecer contraseña</a>
+        <a>¿Todavía no tienes una cuenta? Regístrate</a>
+</form>
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<h2>Registro</h2> 
+<form method="POST">
+    {% csrf_token %} 
+    <h3>Datos de usuario</h3>
+    <div>
+        {{ user_form.as_p }}
+    </div>
+    
+      <h3>Perfil</h3>
+    <div>
+        {{ perfil_form.as_p }}
+    </div>
+
+        <button type="submit">Registrarse</button>
+</form>
