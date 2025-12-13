@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cuaderno de Crecimiento</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+
+<h2>Crear perfil de menor (Niño/a o adolescente)</h2> 
+<form method="POST">
+    {% csrf_token %} 
+   <!-- <h3>Datos del menor</h3> -->
+    <div>
+        <!-- {{ crear_perfil_menor_form.as_p }} -->
+        {{ crear_perfil_menor_form }}
+    </div>
+    
+    <button type="submit">Crear perfil de menor</button>
+</form>
+</body>
+</html>

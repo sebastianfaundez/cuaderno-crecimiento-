@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <title>Document</title>
+    <style>
+  .formulario-ancho-fijo {
+    max-width: 500px; /* Ancho máximo */ 
+    width: 100%;      /* Se adapta a pantallas pequeñas */
+  }
+
+  .btn-mi-color {
+    background-color: #47aa2b; /* Un naranja personalizado */
+    color: white;
+    border-color: black; /* Borde de otro color */
+}
+
+.btn-mi-color:hover {
+    background-color: #9fcd91;
+    border-color: black;
+}
+
+.bg-color-verde {
+    background-color: #47aa2b; /* Un naranja personalizado */
+    color: white;
+   
+}
+
+.bg-color-verde-suave {
+    background-color: #9fcd91;
+    
+}
+
+.errorlist{
+  background-color: #f44b4b;
+   color: white;
+}
+
+</style>
+</head>
+<body>
+
+
+
+<div class="card mb-6" style="max-width: 800px;">
+    {% for message in messages %}
+      <div class="alert alert-success" id="msg" role="alert">
+         <p>{{ message }}</p>
+      </div>
+    {% endfor %}
+
+  <div class="row g-0">
+    
+    <div class="col-md-6 mx-auto bg-light p-3">
+     
+      <!-- isotipo grafico curva verde y titulo cuaderno de Crecimiento (elementos que estan arriba de la imagen de niño con jirafa) -->
+      <div class="d-flex align-items-center">
+        {% load static %} 
+        <img src="{% static 'images/isotipo.png'%}" class="img-fluid me-3" alt="Your Image" width="60" height="100">
+        <div>
+           <p><h5> Cuaderno de Crecimiento </h5></p>
+        </div>
+      </div>
+
+
+      
+      <div class="text-center p-3">
+        {% load static %}
+        <img src="{% static 'images/img_menor_jirafa.png'%}" alt="Imagen medicion talla menor" width="350" height="400" class="mb-4"> 
+      <br/>
+        <h2><span class="badge rounded-pill bg-color-verde">{{menor.nombres}}</span></h2>
+
+         {% if menor.sexo == "F" %}
+          
+            <h2><span class="badge rounded-pill bg-color-verde">Sexo: Femenino</span></h2>
+        {% else %}
+           
+            <h2><span class="badge rounded-pill bg-color-verde">Sexo: Masculino</span></h2>
+        {% endif %}
+      </div>
+    </div>
+    
+
+    <div class="col-md-6 bg-color-verde-suave text-center p-3">
+        
+      
+      <div class="card-body">
+        <h5 class="card-title">Ingreso de datos de medición</h5>
+        <br/>
+
+
+        <div class="mb-5">
+        <form method="POST">
+        {% csrf_token %} 
+        <div>
+           {{ registrar_medicion_form }}
+        </div>
+        <button type="submit">Registrar Medición</button>
+        </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  setTimeout(() => {
+  if($('#msg').length > 0) {
+    $('#msg').remove();
+  }
+   console.log('This message appears after 2 seconds!');
+}, 5000); // 2000 milliseconds = 2 seconds
+</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import RegistroUsuarioForm, PerfilForm
@@ -16,7 +16,7 @@ def login_view(request):
             login(request, user)
             return redirect('panel_de_control')
         else: 
-            messages.error(request, 'datos incorrectos')
+            messages.error(request, 'Usuario o clave incorrectos!')
 
     return render(request, 'login.html')
 

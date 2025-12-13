@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cuaderno de Crecimiento</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Lista de Menores</h1>
+
+<div class="row col-12 justify-content-end mb-2 pr-0">
+  <a class="btn btn-success col-md-3" href="{% url 'crear_perfil_menor' %}">Crear Perfil de Menor</a> 
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombres</th>
+        <th>Apellido Paterno</th>
+        <th>Apellido Materno</th>
+        <th>Sexo</th>
+        <th>Fecha Nacimiento</th>
+        <th></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    {% for menor in menores %}
+    <tr>
+        <td>{{ menor.id }}</td>
+        <td>{{ menor.nombres }}</td>
+        <td>{{ menor.apellido_paterno }}</td>
+        <td>{{ menor.apellido_materno }}</td>
+        <td>{{ menor.sexo }} </td>
+        <td> {{ menor.fecha_nacimiento|date:"d/m/Y" }} </td>
+        <td> 
+           <!-- <a href="{% url 'ficha_menor' id=menor.id %}">Ficha</a> -->
+           <a href="{% url 'registrar_medicion' id=menor.id %}">Registrar Medición</a>
+        </td>
+    </tr>
+    {% empty %}
+        <tr><td>No hay registros disponibles.</td></tr>
+    {% endfor %}
+
+  </tbody>
+
+
+</table>
+
+</body>
+</html>
