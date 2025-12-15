@@ -57,10 +57,7 @@ def registrar_medicion_view(request, id):
         else:
             # Form invalid, re-render with errors
             menor = PerfilMenor.objects.get(id=id)
-            context = {
-            'registrar_medicion_form': registrar_medicion_form,
-            'menor': menor
-        }
+            context = {'registrar_medicion_form': registrar_medicion_form, 'menor': menor}
             return render(request, 'fichaMenor.html', context)
     else:
         registrar_medicion_form = RegistrarMedicionForm()

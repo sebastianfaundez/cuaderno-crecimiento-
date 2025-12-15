@@ -32,22 +32,28 @@ class RegistrarMedicionForm(forms.ModelForm):
             }
        
        widgets = {
-        #'observaciones_medicas': forms.Textarea(attrs={'class': 'form-control'}),
-        'observaciones_medicas': forms.Textarea(),
+         'observaciones_medicas': forms.Textarea(),
+         #'fecha_medicion': forms.DateInput(format='%d/%m/%Y'),
+         'fecha_medicion': forms.DateInput(format='%d/%m/%Y', attrs={
+            'placeholder': 'Ej: 01/08/2012'
+            }),
+            
           }
        
     def clean(self):
-           print('linea 35 forms.py')
+           print('linea 40 forms.py')
            cleaned_data = super().clean()
            input_peso = cleaned_data.get('peso')
            input_talla = cleaned_data.get('talla')
         
            if not input_peso and not input_talla:
-                raise ValidationError("Debe especificar Peso o Talla (al menos uno de esos valores).")
+                print('linea 46 forms.py')
+                raise ValidationError("Debe especificar Talla o Peso (al menos uno de esos dos valores).")
            return cleaned_data       
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['class'] = 'form-control rounded-5 me-2'
+            self.fields['fecha_medicion'].input_formats = ['%d-%m-%Y', '%d/%m/%Y']
             

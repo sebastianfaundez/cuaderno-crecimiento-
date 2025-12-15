@@ -1,50 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+{% extends "base.html" %}
 
-    <title>Document</title>
-    <style>
-  .formulario-ancho-fijo {
-    max-width: 500px; /* Ancho máximo */ 
-    width: 100%;      /* Se adapta a pantallas pequeñas */
-  }
-
-  .btn-mi-color {
-    background-color: #47aa2b; /* Un naranja personalizado */
-    color: white;
-    border-color: black; /* Borde de otro color */
-}
-
-.btn-mi-color:hover {
-    background-color: #9fcd91;
-    border-color: black;
-}
-
-.bg-color-verde {
-    background-color: #47aa2b; /* Un naranja personalizado */
-    color: white;
-   
-}
-
-.bg-color-verde-suave {
-    background-color: #9fcd91;
-    
-}
-
-.errorlist{
-  background-color: #f44b4b;
-   color: white;
-}
-
-</style>
-</head>
-<body>
-
-
+{% block content %}
 
 <div class="card mb-6" style="max-width: 800px;">
     {% for message in messages %}
@@ -89,19 +45,60 @@
         
       
       <div class="card-body">
+        
+         
+        
         <h5 class="card-title">Ingreso de datos de medición</h5>
         <br/>
+               <!--
+               {% if form.errors %}
+                  <div class="alert alert-danger" id="err-msg" role="alert">
+                        {{ registrar_medicion_form.non_field_errors }} {# Show general form errors 15/12/2025 #}
+                  </div>
+               {% endif %}
+               --> 
+
+            <!-- inicio prueba listado errores en el formulario  -->
+            {% if registrar_medicion_form.errors %}
+            <div class="alert alert-danger">
+                <strong>Errores encontrados:</strong>
+                <ul>
+                    {% if registrar_medicion_form.non_field_errors %}
+                        {% for error in registrar_medicion_form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endif %}
+                    {% for field in registrar_medicion_form %}
+                        {% for error in field.errors %}
+                            <li>{{ field.label }}: {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            <!-- cierre prueba listado errores en el formulario  -->
 
 
-        <div class="mb-5">
-        <form method="POST">
-        {% csrf_token %} 
-        <div>
-           {{ registrar_medicion_form }}
-        </div>
-        <button type="submit">Registrar Medición</button>
-        </form>
-        </div>
+
+            <div class="mb-5">           
+                {% load widget_tweaks %}
+                <form method="post" class="row g-3">
+                  {% csrf_token %}
+                  {% for field in registrar_medicion_form %}
+                  <div class="col-md-6">
+                      {{ field.label_tag }}
+                      {{ field|add_class:"form-control" }}
+                      {% if field.help_text %}
+                          <small class="form-text text-muted">{{ field.help_text }}</small>
+                      {% endif %}
+                  {{ field.errors }}
+                  </div>
+                  {% endfor %}
+                  <button type="submit" class="btn btn-primary">Registrar Medición</button>
+                </form>
+            </div>
+
+
       </div>
     </div>
 
@@ -114,7 +111,6 @@
     $('#msg').remove();
   }
    console.log('This message appears after 2 seconds!');
-}, 5000); // 2000 milliseconds = 2 seconds
+}, 5000); // 5000 milliseconds = 5 seconds
 </script>
-</body>
-</html>
+{% endblock content %}

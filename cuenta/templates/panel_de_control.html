@@ -1,15 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
 <h2>Cuaderno de Crecimiento</h2>
+
 <p>
     ¡Bienvenidos al registro de datos de tus hijos!
 </p>
-<div>
+<div class="list-group">
     <ul>
      {% if user.is_authenticated %}
 
     </ul>
-    <li>
-        <a href="{% url 'panel_de_control' %}">Inicio</a>
-    </li>
 
     <li>
         <a href="{% url 'crear_perfil_menor' %}">Crear perfil de menor</a> 
@@ -18,23 +19,8 @@
     <li>
         <a href="{% url 'listar_menores' %}">Perfiles de menores</a> 
     </li>
-    
-
-    <li>
-        <form action="{% url 'logout' %}"method="post">
-            {% csrf_token %}
-            <button type="submit">Cerrar sesión</button>
-        </form>
-    </li>
-  
+ 
     {% endif %}
-    <!--
-    <li>
-        <a href="{% url 'login' %}">Iniciar sesión</a>
-    </li>
-    <li>
-        <a href="{% url 'registro' %}">Regístrate</a>
-
-    </li>
-    -->
+    
 </div>
+{% endblock content %}

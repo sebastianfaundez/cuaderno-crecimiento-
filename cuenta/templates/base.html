@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <title>Cuaderno de Crecimiento</title>
+
+<style>
+
+  .formulario-ancho-fijo {
+    max-width: 500px; /* Ancho máximo */ 
+    width: 100%;      /* Se adapta a pantallas pequeñas */
+  }
+
+  .btn-mi-color {
+    background-color: #47aa2b; /* Un naranja personalizado */
+    color: white;
+    border-color: black; /* Borde de otro color */
+}
+
+.btn-mi-color:hover {
+    background-color: #9fcd91;
+    border-color: black;
+}
+
+.bg-color-verde {
+    background-color: #47aa2b; /* Un naranja personalizado */
+    color: white;
+   
+}
+
+.bg-color-verde-suave {
+    background-color: #9fcd91;
+    
+}
+
+.errorlist{
+  background-color: #f44b4b;
+   color: white;
+}
+
+
+.btn-cerrar-sesion {
+  
+  background-color: #83c224ff; /* Green background */
+  color: white;             /* White text */
+  padding: 15px 30px;       /* Space inside button */
+  border: none;             /* Remove default border */
+  border-radius: 10px;      /* Rounded corners */
+  cursor: pointer;          /* Pointer cursor on hover */
+  font-size: 16px;          /* Text size */
+}
+</style>
+
+
+</head>
+<body>
+<!-- Inicio navbar -->
+<nav class="navbar" style="background-color: #9fcd91;" data-bs-theme="light">
+  <!-- Navbar content -->
+    
+     {% if user.is_authenticated %}
+  
+        <a class="btn btn-primary" href="{% url 'panel_de_control' %}">Inicio</a>
+  
+        <a class="btn btn-primary" href="{% url 'crear_perfil_menor' %}">Crear perfil de menor</a> 
+    
+        <a class="btn btn-primary" href="{% url 'listar_menores' %}">Perfiles de menores</a> 
+
+     <p>Bienvenido(a): <span class="badge text-bg-success"> {{ request.user.get_full_name }} </span> </p>
+        <form action="{% url 'logout' %}"method="post">
+            {% csrf_token %}
+            <button class="btn-cerrar-sesion" type="submit">Cerrar sesión</button>
+        </form>
+  
+    {% endif %}
+</nav>
+<!-- Fin    navbar -->
+<div class="d-flex justify-content-center">
+    <div>
+
+{% block content %}
+
+{% endblock content %}
+</div>
+</div>
+</body>
+</html>

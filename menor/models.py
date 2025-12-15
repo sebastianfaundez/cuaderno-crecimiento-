@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-#from cuenta.models import Perfil
 from .choices import sexos
 from .choices import fuentes_datos
 
