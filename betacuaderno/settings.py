@@ -30,8 +30,8 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = ['viasoft.pythonanywhere.com']
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env("ALLOWED_HOST").split(",")
 
 
 # Application definition
@@ -92,7 +92,7 @@ DATABASES = {
     }
 }
 
-DATABASES["default"] = dj_database_url.parse("postgresql://cuaderno_digital_user:QhfPMk81Ne6E6oGC5BoHTiPiVDfGVyYG@dpg-d50lgon5r7bs739hlu7g-a.virginia-postgres.render.com/cuaderno_digital")
+DATABASES["default"] = dj_database_url.parse(env("DATABASE_URL"))
 
 
 # Password validation
