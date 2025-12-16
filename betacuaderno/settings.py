@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 import environ
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +30,8 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['viasoft.pythonanywhere.com']
+#ALLOWED_HOSTS = ['viasoft.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -88,6 +91,8 @@ DATABASES = {
         'PORT': env("DB_PORT"),
     }
 }
+
+DATABASES["default"] = dj_database_url.parse("postgresql://cuaderno_digital_user:QhfPMk81Ne6E6oGC5BoHTiPiVDfGVyYG@dpg-d50lgon5r7bs739hlu7g-a.virginia-postgres.render.com/cuaderno_digital")
 
 
 # Password validation
