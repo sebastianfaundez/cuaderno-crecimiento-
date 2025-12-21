@@ -30,8 +30,8 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = []
-ALLOWED_HOSTS = env("ALLOWED_HOST").split(",")
+ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = env("ALLOWED_HOST").split(",")
 
 
 # Application definition
@@ -64,7 +64,7 @@ ROOT_URLCONF = 'betacuaderno.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -93,7 +93,7 @@ DATABASES = {
     }
 }
 
-DATABASES["default"] = dj_database_url.parse(env("DATABASE_URL"))
+#DATABASES["default"] = dj_database_url.parse(env("DATABASE_URL"))
 
 
 # Password validation
@@ -130,7 +130,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/' # linea original 
+STATIC_URL = 'static/'  
 #STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'betacuaderno/static'),)

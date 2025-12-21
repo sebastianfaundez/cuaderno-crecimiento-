@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+
 {% block content %}
 
 <div class="card mb-6" style="max-width: 800px;">
@@ -10,7 +11,10 @@
     {% endfor %}
 
   <div class="row g-0">
-    
+    <diV class="container">
+      <a class="btn btn-success" href="{% url 'historico_mediciones_menor' id=menor.id %}"> Historial de Mediciones de menor</a>
+    </div>
+    <br/>
     <div class="col-md-6 mx-auto bg-light p-3">
      
       <!-- isotipo grafico curva verde y titulo cuaderno de Crecimiento (elementos que estan arriba de la imagen de niño con jirafa) -->
@@ -30,6 +34,9 @@
       <br/>
         <h2><span class="badge rounded-pill bg-color-verde">{{menor.nombres}}</span></h2>
 
+        
+        
+
          {% if menor.sexo == "F" %}
           
             <h2><span class="badge rounded-pill bg-color-verde">Sexo: Femenino</span></h2>
@@ -37,6 +44,9 @@
            
             <h2><span class="badge rounded-pill bg-color-verde">Sexo: Masculino</span></h2>
         {% endif %}
+
+          <h2><span class="badge rounded-pill bg-color-verde">{{ menor.edad_actual }} años</span></h2>
+
       </div>
     </div>
     

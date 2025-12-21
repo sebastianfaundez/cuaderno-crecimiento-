@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from .choices import sexos
 from .choices import fuentes_datos
+from datetime import date
 
 # Create your models here.
 class PerfilMenor(models.Model):
@@ -12,10 +13,32 @@ class PerfilMenor(models.Model):
     apellido_materno = models.CharField(max_length=20, verbose_name="Apellido Materno")
     fecha_nacimiento =models.DateField()
     sexo = models.CharField(max_length=1, choices=sexos, default='F')
-    observaciones = models.CharField(max_length=200)
+    observaciones = models.CharField(max_length=200, blank=True, null=True, default=None)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
 
+    
+    #calcula edad actual
+    @property
+    def edad_actual(self):
+        """
+        Calcular edad actual basado en fecha de nacimiento
+        :return: int edad
+        """
+        if self.fecha_nacimiento:
+            # Obtener fecha de hoy
+            today = date.today()
+            # Calcular Edad
+            age = today.year - self.fecha_nacimiento.year - (
+                    (today.month, today.day) < (self.fecha_nacimiento.month, self.fecha_nacimiento.day))
+            return age
+
+        # Si no tiene fecha su edad es 0
+        return 0
+    
+    
+    
+    
     def nombre_completo(self):
         return "{} {}, {}".format(self.apellido_paterno, self.apellido_materno, self.nombres)
      

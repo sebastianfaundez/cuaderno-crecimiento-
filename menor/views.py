@@ -3,7 +3,9 @@ from django.contrib.auth.decorators import login_required
 from .forms import CrearPerfilMenorForm
 from .forms import RegistrarMedicionForm
 from .models import PerfilMenor
+from .models import MedicionCrecimiento
 from django.contrib import messages
+import datetime
 
 # Create your views here.
 
@@ -15,6 +17,20 @@ def listar_perfiles_menores_view(request):
     return render(request, 'listar/perfilesMenores.html', {"menores": menores})
 
 
+# Listado histórico de mediciones de un menor
+@login_required
+def historico_mediciones_menor_view(request, id):
+    mediciones = MedicionCrecimiento.objects.filter(perfil_id=id)
+    menor = PerfilMenor.objects.get(id=id)
+
+    context = {
+            'mediciones': mediciones,
+            'menor': menor
+        }
+
+    return render(request, 'listar/historicoMedicionesMenor.html', context)
+
+
 @login_required
 def ficha_menor_view(request, id):
     #print(id)
@@ -23,7 +39,7 @@ def ficha_menor_view(request, id):
 
 
 
-
+# Formulario de creación de un perfil de menor
 @login_required
 def crear_perfil_menor_view(request):
     if request.method =='POST':
@@ -48,7 +64,11 @@ def registrar_medicion_view(request, id):
     print(id)
     if request.method =='POST':
         registrar_medicion_form = RegistrarMedicionForm(request.POST)
-        if registrar_medicion_form.is_valid(): 
+        if registrar_medicion_form.is_valid():
+             # Receive the submitted date as an instance of `datetime.date`.
+            date: datetime.date = registrar_medicion_form.cleaned_data["fecha_medicion"] 
+
+
             medicion = registrar_medicion_form.save(commit=False)
             medicion.perfil_id = id # se setea el id del perfil del manor
             medicion.save()

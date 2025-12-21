@@ -18,6 +18,7 @@
         <th>Sexo</th>
         <th>Fecha Nacimiento</th>
         <th></th>
+        <th></th>
     </tr>
   </thead>
   
@@ -31,8 +32,9 @@
         <td>{{ menor.sexo }} </td>
         <td> {{ menor.fecha_nacimiento|date:"d/m/Y" }} </td>
         <td> 
-           <a href="{% url 'registrar_medicion' id=menor.id %}">Registrar Medición</a>
+           <a href="{% url 'registrar_medicion' id=menor.id %}">Registrar medición</a>
         </td>
+        <td><a href="{% url 'historico_mediciones_menor' id=menor.id %}">Historial mediciones</a></td>
     </tr>
     {% empty %}
         <tr><td>No hay registros disponibles.</td></tr>

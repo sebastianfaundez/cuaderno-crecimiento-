@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Usuarios secundarios</h3>
+
+<div class="row col-12 justify-content-end mb-2 pr-0">
+  <a class="btn btn-success col-md-3" href="{% url 'registro_secundario' %}">Crear usuario secundario</a> 
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombres</th>
+        <th>Apellido Paterno</th>
+        <th>Apellido Materno</th>
+        <th>Email</th>
+        <th>Vigente</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+  
+    {% for usuario in usuarios %}
+   
+    <tr>
+        <td>{{ usuario.id }}</td>
+        <td>{{ usuario.usuario_principal.username }}</td>
+        <td>{{ usuario.username }}</td>
+        <td>{{ usuario.last_name }}</td>
+        <td>{{ usuario.email }} </td>
+        <td>{{ usuario.is_active}} </td>
+    </tr>
+    {% empty %}
+        <tr><td>No hay registros disponibles.</td></tr>
+    {% endfor %}
+
+  </tbody>
+
+</table>
+{% endblock content %}

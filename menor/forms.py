@@ -2,25 +2,32 @@ from django import forms
 from . import models 
 from django.core.exceptions import ValidationError 
 
+
 class CrearPerfilMenorForm(forms.ModelForm):
 
     class Meta:
         model = models.PerfilMenor 
         fields=['nombres', 'apellido_paterno', 'apellido_materno', 'fecha_nacimiento', 'sexo', 'observaciones']
 
+        widgets = {
+            'nombres': forms.TextInput(attrs={'class':'form-control'}),
+            'apellido_paterno': forms.TextInput(attrs={'class':'form-control'}),
+            'apellido_materno': forms.TextInput(attrs={'class':'form-control'}),
+            'fecha_nacimiento': forms.DateInput(attrs={'class':'form-control', 'type':'date'}) ,   
+            'sexo': forms.Select(attrs={'class':'form-control'}) ,     
+            'observaciones': forms.Textarea(attrs={'class':'form-control'}),                                                      
+            }
     
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
+    
 
 
 class RegistrarMedicionForm(forms.ModelForm):
     
     class Meta:
        model = models.MedicionCrecimiento
-       fields=['fecha_medicion', 'fuente_dato', 'edad_anos', 'edad_meses', 'talla', 'peso', 'imc', 'perimetro_cefalico', 'perimetro_cintura', 'observaciones_medicas'] 
-       
+       #fields=['fecha_medicion', 'fuente_dato', 'edad_anos', 'edad_meses', 'talla', 'peso', 'imc', 'perimetro_cefalico', 'perimetro_cintura', 'observaciones_medicas'] 
+       fields=['fecha_medicion', 'fuente_dato', 'edad_anos', 'edad_meses', 'talla', 'peso', 'imc', 'perimetro_cefalico', 'observaciones_medicas'] 
+
        labels = {
                 'fecha_medicion': "Fecha de la Medición",
                 'peso': "Peso (K,gr)",
@@ -32,13 +39,22 @@ class RegistrarMedicionForm(forms.ModelForm):
             }
        
        widgets = {
-         'observaciones_medicas': forms.Textarea(),
+         'observaciones_medicas': forms.Textarea(attrs={'cols': '150', 'rows': '4'}),
          #'fecha_medicion': forms.DateInput(format='%d/%m/%Y'),
          'fecha_medicion': forms.DateInput(format='%d/%m/%Y', attrs={
-            'placeholder': 'Ej: 01/08/2012'
-            }),
-            
-          }
+             'placeholder': 'Ej: 01/08/2012'
+         }),
+       
+       
+       }
+
+       
+     
+       
+    
+    
+       
+     
        
     def clean(self):
            print('linea 40 forms.py')

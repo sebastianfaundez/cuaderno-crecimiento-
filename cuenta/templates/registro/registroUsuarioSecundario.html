@@ -1,0 +1,10 @@
+<h2>Crear Usuario Secundario</h2> 
+<form method="POST">
+    {% csrf_token %} 
+    <h3>Datos de usuario secundario</h3>
+    <div>
+        {{ user_form.as_p }}
+    </div>
+    
+         <button type="submit">Crear Usuario Secundario</button>
+</form>
