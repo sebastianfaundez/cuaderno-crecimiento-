@@ -1,5 +1,6 @@
 from django import forms 
-from . import models 
+from . import models
+from datetime import date 
 from django.core.exceptions import ValidationError 
 
 
@@ -29,7 +30,7 @@ class RegistrarMedicionForm(forms.ModelForm):
        fields=['fecha_medicion', 'fuente_dato', 'edad_anos', 'edad_meses', 'talla', 'peso', 'imc', 'perimetro_cefalico', 'observaciones_medicas'] 
 
        labels = {
-                'fecha_medicion': "Fecha de la Medición",
+                'fecha_medicion': "Fecha de medición",
                 'peso': "Peso (K,gr)",
                 'talla': "Talla (Cms)",
                 'edad_anos': "Edad en años",
@@ -44,9 +45,15 @@ class RegistrarMedicionForm(forms.ModelForm):
          'fecha_medicion': forms.DateInput(format='%d/%m/%Y', attrs={
              'placeholder': 'Ej: 01/08/2012'
          }),
-       
-       
+              
        }
+
+         
+       def clean_fecha_medicion(self):
+          entered_date = self.cleaned_data.get('fecha_medicion')
+          if entered_date and entered_date > date.today():
+            raise ValidationError("La fecha de medición debe ser menor a la fecha actual!")
+          return entered_date
 
        
      

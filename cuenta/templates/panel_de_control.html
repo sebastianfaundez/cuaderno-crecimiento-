@@ -1,26 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Cuaderno de Crecimiento</h2>
-
-<p>
-    ¡Bienvenidos al registro de datos de tus hijos!
-</p>
-<div class="list-group">
-    <ul>
-     {% if user.is_authenticated %}
-
-    </ul>
-
-    <li>
-        <a href="{% url 'crear_perfil_menor' %}">Crear perfil de menor</a> 
-    </li>
-
-    <li>
-        <a href="{% url 'listar_menores' %}">Perfiles de menores</a> 
-    </li>
- 
-    {% endif %}
+{% load static %} 
+<div style="background-image: url('{% static 'images/img_panel_control.jpeg'%}'); height: 500px; width: 800px; background-size: cover; background-repeat: no-repeat; ">
     
+    <div class="p-3 mb-2 text-white" style="background-color: #5C7566 ;">
+        <h2>Cuaderno de Crecimiento</h2>
+        <p>¡Bienvenidos al registro de datos de tus hijos!</p>
+    </div>
+    
+  
+
 </div>
 {% endblock content %}

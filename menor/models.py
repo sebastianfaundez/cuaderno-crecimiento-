@@ -74,3 +74,59 @@ class MedicionCrecimiento(models.Model):
     def __str__(self): 
         #return self.id
         return str(self.id)
+    
+    
+    # Tallas edad niñas desde nacimiento a 5 años zscores
+class TallaEdadNinasNac5AnosZscores(models.Model):
+    anos_meses = models.CharField(max_length=5, primary_key=True)
+    meses = models.IntegerField(blank=True, null=True)
+    menos2de = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+    menos1de = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+    mediana = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+    mas1de = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+    mas2de = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'talla_edad_ninas_nac5anos_zscores'
+
+class TallaEdadNinosNac5AnosZscores(models.Model):
+    anos_meses = models.CharField(max_length=5, primary_key=True)
+    meses = models.IntegerField(blank=True, null=True)
+    menos2de = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+    menos1de = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+    mediana = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+    mas1de = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+    mas2de = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'talla_edad_ninos_nac5anos_zscores'
+
+
+class PesoEdadNinasNac5AnosZscores(models.Model):
+    anos_meses = models.CharField(max_length=5, primary_key=True)
+    meses = models.IntegerField(blank=True, null=True)
+    menos2de = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+    menos1de = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+    mediana = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+    mas1de = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+    mas2de = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'peso_edad_ninas_nac5anos_zscores'
+
+
+class PesoEdadNinosNac5AnosZscores(models.Model):
+    anos_meses = models.CharField(max_length=5, primary_key=True)
+    meses = models.IntegerField(blank=True, null=True)
+    menos2de = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+    menos1de = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+    mediana = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+    mas1de = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+    mas2de = models.DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'peso_edad_ninos_nac5anos_zscores'

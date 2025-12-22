@@ -4,7 +4,7 @@
 
 
 <h3>
-   <small class="text-body-secondary">Histórico de mediciones de menor</small>
+   <small class="text-body-secondary">Historial de mediciones de menor</small>
 </h3>
 
 
@@ -35,7 +35,7 @@
 </div>
 
 
-<table class="table table-striped-columns table-bordered border-primary">
+<table class="table table-striped-columns table-bordered border-primary text-center">
   <thead>
     <tr>
         <th>ID Medición</th>
@@ -47,8 +47,7 @@
         <th>Talla</th>
         <th>IMC</th>
         <th>Perímetro Craneo</th>
-        <th>Perímetro Cintura</th>
-
+        
      </tr>
   </thead>
   
@@ -64,8 +63,7 @@
         <td>{{ medicion.talla|default_if_none:"" }} </td>
         <td>{{ medicion.imc|default_if_none:"" }} </td>
         <td>{{ medicion.perimetro_cefalico|default_if_none:"" }} </td>
-        <td>{{ medicion.perimetro_cintura|default_if_none:"" }} </td>
-     
+             
   
     </tr>
     {% empty %}

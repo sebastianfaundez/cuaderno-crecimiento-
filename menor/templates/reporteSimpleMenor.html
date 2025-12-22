@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="card mb-6" style="max-width: 800px;">
+    {% for message in messages %}
+      <div class="alert alert-success" id="msg" role="alert">
+         <p>{{ message }}</p>
+      </div>
+    {% endfor %}
+
+  <div class="row g-0">
+    <diV class="container">
+      
+    </div>
+    <br/>
+    <div class="col-md-6 mx-auto bg-light p-3">
+     
+      <!-- isotipo grafico curva verde y titulo cuaderno de Crecimiento (elementos que estan arriba de la imagen de niño con jirafa) -->
+      <div class="d-flex align-items-center">
+        {% load static %} 
+        <img src="{% static 'images/isotipo.png'%}" class="img-fluid me-3" alt="Your Image" width="60" height="100">
+        <div>
+           <p><h5> Cuaderno de Crecimiento </h5></p>
+        </div>
+      </div>
+
+
+      
+      <div class="text-center p-3">
+        {% load static %}
+        <img src="{% static 'images/img_menor_jirafa.png'%}" alt="Imagen medicion talla menor" width="350" height="400" class="mb-4"> 
+      <br/>
+        <h2><span class="badge rounded-pill bg-color-verde">{{menor.nombres}}</span></h2>
+
+        
+        
+
+         {% if menor.sexo == "F" %}
+          
+            <h2><span class="badge rounded-pill bg-color-verde">Sexo: Femenino</span></h2>
+        {% else %}
+           
+            <h2><span class="badge rounded-pill bg-color-verde">Sexo: Masculino</span></h2>
+        {% endif %}
+
+          <h2><span class="badge rounded-pill bg-color-verde">{{ menor.edad_actual }} años</span></h2>
+
+      </div>
+    </div>
+    
+
+    <div class="col-md-6 bg-color-verde-suave text-center p-3">
+        
+      
+      <div class="card-body rounded" style="background-color: #A0B5A8;">
+        <h2 class="card-title">Reporte</h2>
+               
+          <p class="h5 text-start">Último registro de medición</p>
+              <table class="table table-borderless text-start">
+                <tr> 
+                  <td>Peso</td>
+                  <td>Talla</td>
+                  <td>IMC</td>
+                </tr>
+                
+                <tr>
+                  <td>{{ display_peso }} </td>
+                  
+                  
+                  <td>{{ display_talla }} </td>
+                  <td>{{ medicion.imc|default_if_none:"" }}</td>
+                </tr>
+                
+                <tr></tr>
+                <tr></tr>
+              </table>
+              <p class="h6 text-start">Fecha medición: {{ medicion.fecha_medicion|date:"d/m/Y" }} </p>
+         
+
+
+            <br/>
+            <div class="mb-5">     
+              <p class="h5 text-start">Interpretación automática</p>
+              <p class="text-start"> {{ mensaje_talla }} </p>  
+              <p class="text-start"> {{ msg_peso }} </p>     
+            </div>
+
+            <div class="mb-5">     
+              <p class="h5 text-start">Recomendaciones educativas</p>
+              <p class="text-start"> {{ msg_recomendaciones_talla }} </p> 
+              <p class="text-start"> {{ msg_recomendaciones_peso }} </p>      
+            </div>
+      </div>
+    
+    </div>
+
+  </div>
+</div>
+
+
+{% endblock content %}
